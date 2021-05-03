@@ -1,15 +1,15 @@
 import Expenses from './components/Expenses';
-
+import Background from './components/Background';
 import './App.css';
 function App() {
   
   return (
     
-    <div className="App">
-      <header className="App-header">
+    <Background className="App">
+      <div className="App-header">
        <Expenses />
-      </header>
-    </div>
+      </div>
+    </Background>
   );
 }
 
