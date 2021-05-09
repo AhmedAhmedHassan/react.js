@@ -1,11 +1,12 @@
 import './table.css';
 import TableRow from './TableRow';
 
-const Table=()=>{
+const Table=(props)=>{
     const items=[
         {name:'Ahmed', date:new Date(), age:'26'},
         {name:'Ali', date:new Date('11-4-2002'), age:'2'},
         {name:'Hany', date:new Date('11-4-2006'), age:'30'},
+        
       ];
     return(
       <div>

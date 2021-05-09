@@ -1,7 +1,7 @@
 import React , {useState} from 'react';
 import './form.css';
 
-const Form=()=>{
+const Form=(props)=>{
 
   // another way of state 
 // const [enteredInputs, setEnteredInputs] = useState({
@@ -44,7 +44,7 @@ const submitHandler = event =>{
     date : new Date(enteredDate)
   }
 
-console.log(output)
+props.onAddData(output);
 setEnteredTitle('')
 setEnteredAge('')
 setEnteredDate('')

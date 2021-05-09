@@ -4,9 +4,15 @@ import Form from './components/form/Form';
 
 function App() {
  
+  const outputDataHandler=(output)=>{
+    console.log(output)
+  }
+
+  
+
   return (
    <div>
-    <Form />
+    <Form onAddData={outputDataHandler} />
     <Table />
    </div>
   );
