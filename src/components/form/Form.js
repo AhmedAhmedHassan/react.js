@@ -5,21 +5,21 @@ const Form=(props)=>{
 
   // another way of state 
 // const [enteredInputs, setEnteredInputs] = useState({
-//   enteredTitle : '',
+//   enteredname : '',
 //   enteredAge : '',
 //   enteredDate : ''
 // })
 
-const [enteredTitle, setEnteredTitle] = useState('');
+const [enteredname, setEnteredname] = useState('');
 const [enteredAge, setEnteredAge] = useState('');
 const [enteredDate, setEnteredDate] = useState('');
 
-const titleHandler = event =>{
-  setEnteredTitle(event.target.value);
+const nameHandler = event =>{
+  setEnteredname(event.target.value);
 //    setEnteredInputs((previousState)=>{
 //      return{
 //       ...previousState,
-//       enteredTitle : event.target.value
+//       enteredname : event.target.value
 //      }
       
 //   })
@@ -39,13 +39,13 @@ const submitHandler = event =>{
   event.preventDefault();
 
   const output = {
-    title : enteredTitle,
+    name : enteredname,
     age : enteredAge,
     date : new Date(enteredDate)
   }
 
 props.onAddData(output);
-setEnteredTitle('')
+setEnteredname('')
 setEnteredAge('')
 setEnteredDate('')
 
@@ -61,7 +61,7 @@ setEnteredDate('')
       <label for="fname"> Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="Your name.." value={enteredTitle}  onChange={titleHandler} />
+      <input type="text" id="fname" name="firstname" placeholder="Your name.." value={enteredname}  onChange={nameHandler} />
     </div>
   </div>
   
@@ -83,6 +83,7 @@ setEnteredDate('')
   </div>
   <div class="row">
     <input type="submit" value="Submit" />
+    <input type="button" value="Cancel" onClick={props.onCancel}/>
   </div >
   </form >
 </div>
