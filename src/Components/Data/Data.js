@@ -4,9 +4,11 @@ import  './Data.css';
 const Data = (props) =>{
     return (
             <div class="multi-button">
-            <p><button className="data">This is the first element</button></p>
-            <p><button className="data">This is the first element</button></p>
-           
+             {props.users.map(user=>
+                
+                <p key={user.id}><button className="data">{user.name} ({user.age} years old)</button></p>
+             )}   
+            
             </div>
     );
 }
