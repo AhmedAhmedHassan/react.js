@@ -1,17 +1,21 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import Button from '../Ui/Button'
 import Modal from '../Ui/Modal'
+import Wrapper from '../Helpers/Wrapper';
 import './Form.css'
 const AddUser = props =>{
 
     // States
 
-    const [enterUser, setEnterUser]=useState('');
-    const [enterAge, setEnterAge]=useState('');
+    const nameInputRef=useRef()
+    const ageInputRef=useRef()
+   
     const [error,setError]=useState()
 
     const AddUserHandler=event=>{
         event.preventDefault()
+           const enterUser=nameInputRef.current.value
+           const enterAge=ageInputRef.current.value
         if(enterUser.trim().length === 0 || enterAge.trim().length === 0){
           setError({
             title:'invalid input',
@@ -25,45 +29,37 @@ const AddUser = props =>{
           })
           return
         }
-        console.log(enterUser.trim())
-        console.log(enterAge.trim())
+       
         props.onAddUser(enterUser,enterAge)
-        setEnterUser('')
-        setEnterAge('')
+        
          
     }
 
-   const userChangeHandler =(event)=>{
-        setEnterUser(event.target.value)
-   }
-
-   const ageChangeHandler =(event)=>{
-    setEnterAge(event.target.value)
-}
+   
 
   const handleCloseModal = () =>{
     setError(null)
   }
 
     return(
-       <div>
+     <Wrapper>
         {error && <Modal title={error.title} message={error.message} onConfirm={handleCloseModal} />} 
         <form onSubmit={AddUserHandler}>
         <div class="group">
-          <input type="text" value={enterUser} onChange={userChangeHandler}/>
+          <input type="text" ref={nameInputRef}/>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Name</label>
         </div>
         <div class="group">
-          <input type="number" value={enterAge} onChange={ageChangeHandler}/>
+          <input type="number" ref={ageInputRef}/>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Age</label>
         </div>
         <Button />
       </form>
-      </div>
+      </Wrapper>
      
     )
 }
