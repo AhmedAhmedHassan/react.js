@@ -1,51 +1,31 @@
-import React , {useState} from 'react';
-import './App.css';
-import Table from './components/table/Table';
-import Form from './components/form/Form';
+import React, { useState } from 'react';
 
-const items=[
-  {id:1,name:'Ahmed', date:new Date(), age:'26'},
-  {id:2,name:'Ali', date:new Date('11-4-2002'), age:'2'},
-  {id:3,name:'Hany', date:new Date('11-4-2006'), age:'30'},
-  
-];
-
-
-
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
 
 function App() {
- 
- const [expenses, setExpenses]=useState(items)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const outputDataHandler=(output)=>{
-    setExpenses(prevExpenses => {
-      return [output, ...prevExpenses]
-    })
-    console.log(output)
-  }
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
+  };
 
-  
-  const [isEditing, setIsEditing]=useState(false);
-
-  const clickHandler=()=>{
-    setIsEditing(true)
-  }
-
-  const cancelEditing = () =>{
-    setIsEditing(false)
-  }
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
-   <div>
-    {!isEditing && <button onClick={clickHandler}> Add New Item </button>} 
-    {isEditing && <Form onAddData={outputDataHandler} onCancel={cancelEditing}/>}
-    
-    
-    <Table data={expenses}/>
-   </div>
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
   );
 }
-
-
 
 export default App;
